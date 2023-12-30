@@ -5,12 +5,14 @@
   pre_tasks:
 
   - name: install updates (CentOS)
+    tags: allways
     dnf:
       update_only: yes
       update_cache: yes
     when: ansible_distribution == "CentOS"
 
   - name: install updates (Ubuntu/Linux Mint)
+    tags: allways
     apt:
       upgrade: dist
       update_cache: yes
@@ -21,6 +23,7 @@
   tasks:
 
   - name: install apache2 and php
+    tags: apache,apache2,ubuntu,linuxmint
     package:
       name:
         - apache2
@@ -33,6 +36,7 @@
   tasks:
 
   - name: install mariadb package
+    tags: db,mariadb,ubuntu,linuxmint
     apt:
       name: mariadb-server
       state: latest
@@ -43,6 +47,8 @@
   tasks:
 
   - name: install samba package
+    tags: simba
     package:
       name: samba
       state: latest
+
