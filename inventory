@@ -1,3 +1,3 @@
-thed@192.168.1.35
-thed@192.168.1.36
-thed@192.168.1.37
+thed@192.168.1.35 apache_package=apache2 php_package=libapache2-mod-php
+thed@192.168.1.36 apache_package=apache2 php_package=libapache2-mod-php
+thed@192.168.1.37 apache_package=apache2 php_package=libapache2-mod-php
