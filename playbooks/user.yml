@@ -1,0 +1,29 @@
+---
+
+- hosts: all
+  become: true
+  remote_user: thed 
+
+
+  tasks:
+
+  - name: add user marcin1
+    tags: always
+    user:
+      name: marcin1
+      shell: /bin/bash
+
+  - name: add ssh key for marcin
+    tags: always
+    authorized_key:
+      user: marcin1
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIObSj5RArf0ufO8UH6g3n9zw+TyoDkHXX8a6xZeVsEIv marcin default"
+
+  - name: add sudoers
+    tags: always
+    copy:
+      src: /home/marcin/ansible/Ansible/files/sudoer_marcin1
+      dest: /etc/sudoers.d/marcin1
+      owner: root
+      group: root
+      mode: 0440

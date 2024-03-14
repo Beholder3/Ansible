@@ -1,8 +1,0 @@
-[web_servers]
-thed@192.168.1.35
-
-[db_servers]
-thed@192.168.1.36
-
-[file_servers]
-thed@192.168.1.37

@@ -14,9 +14,12 @@
   - name: install updates (Ubuntu/Linux Mint)
     tags: allways
     apt:
-      upgrade: dist
       update_cache: yes
     when: ansible_distribution in ["Ubuntu", "Debian"]
+
+  - name: upgrade
+    apt:
+      upgrade: dist
 
 - hosts: web_servers
   become: true
@@ -47,7 +50,7 @@
   tasks:
 
   - name: install samba package
-    tags: simba
+    tags: samba
     package:
       name: samba
       state: latest

@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Create user marcin123
+    tags: user, marcin123
+    user:
+      name: marcin123
+      password: "{{ 'admin123' | password_hash('sha512') }}"
+      shell: /bin/bash
+
+  - name: Add SSH key for marcin123
+    tags: ssh, marcin123
+    authorized_key:
+      user: marcin123
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIObSj5RArf0ufO8UH6g3n9zw+TyoDkHXX8a6xZeVsEIv marcin default"
+
+  - name: Add sudoers file for marcin123
+    tags: sudoers, marcin123
+    copy:
+      src: /home/marcin/ansible/Ansible/files/sudoer_marcin123
+      dest: /etc/sudoers.d/marcin123
+      owner: root
+      group: root
+      mode: 0440

@@ -1,0 +1,38 @@
+---
+# - hosts: localhost
+#   tasks:
+#     - name: Read password from file
+#       set_fact:
+#         password_contents: "{{ lookup('file', '/home/marcin/ansible/Ansible/files/password.txt') }}"
+
+#     - name: Split password file into lines
+#       set_fact:
+#         password_list: "{{ password_contents.split('\n') | selectattr('strip', 'ne', '') | selectattr('strip', 'ne', ' ') | list }}"
+
+#     - name: Get vars password
+#       command: "cat {{ passoword_list }}"
+#       register: key
+
+- hosts: all
+  become: true
+  vars:
+    user_contents: "{{ lookup('file', '/home/marcin/ansible/Ansible/files/list.txt') }}"
+    user_list: "{{ user_contents.split('\n') | selectattr('strip', 'ne', '') | selectattr('strip', 'ne', ' ') | list }}"
+    password_contents: "{{ lookup('file', '/home/marcin/ansible/Ansible/files/password.txt') }}"
+    password_list: "{{ password_contents.split('\n') | selectattr('strip', 'ne', '') | selectattr('strip', 'ne', ' ') | list }}"
+  tasks:
+    - name: Create users
+      user:
+        name: "{{ item }}"
+        password: "{{ password_list[my_idx] }}"
+        shell: /bin/bash
+      loop: "{{ user_list }}"
+      loop_control:
+        index_var: my_idx
+
+    - name: Add SSH keys for users
+      authorized_key:
+        user: "{{ item }}"
+        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIObSj5RArf0ufO8UH6g3n9zw+TyoDkHXX8a6xZeVsEIv marcin default"
+      loop: "{{ user_list }}"
+      

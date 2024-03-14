@@ -1,0 +1,21 @@
+- hosts: localhost
+  tasks:
+    # - name: Read lines from text file
+    #   set_fact:
+    #     file_contents: "{{ lookup('file', '/home/marcin/ansible/Ansible/files/list.txt') }}"
+
+    # - name: Split text into lines
+    #   set_fact:
+    #     lines_list: "{{ file_contents.split('\n') | selectattr('strip', 'ne', '') | selectattr('strip', 'ne', ' ') | list }}"
+
+    # - name: Show lines list
+    #   debug:
+    #     var: lines_list
+
+
+    - name: Read contents of a file on the controller
+      shell: cat /home/marcin/ansible/Ansible/files/list.txt
+      register: file_contents
+    - name: Read
+      debug:
+        var: file_contents.stdout
