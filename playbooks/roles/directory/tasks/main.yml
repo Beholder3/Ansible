@@ -1,0 +1,27 @@
+    - name: Create workstation directory insisde tmp
+      ansible.builtin.file:
+        path: /tmp/workstation
+        state: directory
+      tags:
+        - directory
+
+    - name: Create prestashop directory inside workstation
+      ansible.builtin.file:
+        path: /tmp/workstation/prestashop
+        state: directory
+      tags:
+        - directory
+
+    - name: Create code directory inside prestashop
+      ansible.builtin.file:
+        path: /tmp/workstation/prestashop/code
+        state: directory
+      tags:
+        - directory
+
+    - name: Create manifest directory inside prestashop
+      ansible.builtin.file:
+        path: /tmp/workstation/prestashop/manifest
+        state: directory
+      tags:
+        - directory

@@ -1,0 +1,7 @@
+- hosts: presta
+  become: true
+  roles:
+    - directory
+    - dockerrole
+    - copy
+    - manifest

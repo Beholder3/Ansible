@@ -1,0 +1,6 @@
+  - name: Run manifest
+    ansible.builtin.command:
+      chdir: /tmp/workstation/prestashop/manifest
+      cmd: docker-compose up -d
+    tags:
+      - manifest

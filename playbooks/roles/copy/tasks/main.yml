@@ -1,0 +1,16 @@
+    - name: Copy code from control machine to server
+      ansible.builtin.copy:
+        src: "{{item}}"
+        dest: /tmp/workstation/prestashop/code
+      with_fileglob:
+        - "maria"
+      tags:
+        - copy
+
+    - name: Copy docker-compose from contorl machine to server
+      ansible.builtin.copy:
+        src: /home/marcin/pro/biznes-elektroniczny/docker-compose.yml
+        dest: /tmp/workstation/prestashop/manifest/
+        remote_src: false
+      tags:
+        - copy
